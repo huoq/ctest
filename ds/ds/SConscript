@@ -1,0 +1,27 @@
+#
+# Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
+#
+
+# -*- mode: python; -*-
+# src directory
+
+import sys
+import platform
+
+Import('BuildEnv')
+
+env = BuildEnv.Clone()
+env.Append(CPPPATH = ['#ds/comm/inc'])
+
+#link libds_comm static lib
+env.Prepend(LIBPATH=[env['TOP']+'/ds'])
+
+subdirs = [
+           'comm',
+           'dss'
+           ]
+BuildEnv = env.Clone()
+for dir in subdirs:
+    BuildEnv.SConscript(dir + '/SConscript',
+                         exports='BuildEnv',
+                         duplicate=0)

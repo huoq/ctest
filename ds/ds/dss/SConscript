@@ -1,0 +1,24 @@
+#
+# Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
+#
+
+# -*- mode: python; -*-
+
+Import('BuildEnv')
+import sys
+
+env = BuildEnv.Clone()
+env.Append(CPPPATH = ['#common/ds/dss/inc'])
+env.Prepend(LIBPATH=[env['TOP_LIB']+'/common', '#common/target', env['TOP_LIB']+'/management-plane'])
+env.Prepend(LIBS=['ds_comm', 'common', 'pthread', 'util', 'dl', 'elf', 'zookeeper_mt', 'nanomsg', 'wconfd', 'confd'])
+
+dss_prog = env.Program('dss', Glob('src/*.c'))
+env.Alias('dss_prog', dss_prog)
+env.Default(dss_prog)
+
+install_dss = env.Install(env['TOP_BIN'] + '/common', dss_prog)
+env.Default(install_dss)
+
+
+#env.Install("#build/bin/common/", dss)
+#env.Alias("install", "#build/bin/common/")

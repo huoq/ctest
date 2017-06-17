@@ -1,0 +1,16 @@
+#
+# Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
+#
+
+# -*- mode: python; -*-
+
+Import('BuildEnv')
+import sys
+
+env = BuildEnv.Clone()
+env.Append(CPPPATH = ['#common/dsa/include',
+		      '#common/ds/comm/inc',
+		      ])
+
+obj = env.Object(Glob('source/*.c'))
+Return("obj")

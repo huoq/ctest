@@ -1,0 +1,17 @@
+#
+# Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
+#
+
+# -*- mode: python; -*-
+
+Import('BuildEnv')
+import sys
+
+env = BuildEnv.Clone()
+env.Append(CFLAGS=['-fPIC'])
+lib_ds_comm = env.Library('libds_comm', Glob('src/*.c'))
+
+#libds_comm as a static lib, will be linked by dss and libdsa.so
+install_lib = env.Install(env['TOP']+'/common/ds', lib_ds_comm)
+env.Default(install_lib)
+

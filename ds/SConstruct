@@ -1,0 +1,17 @@
+# -*- mode: python; -*-
+
+import os
+import sys
+import platform
+
+common = DefaultEnvironment().Clone()
+ 
+BuildEnv = common.Clone()
+BuildEnv['TOP'] = '.'
+print(BuildEnv['TOP'])
+
+subobj = SConscript(dirs=['ds', 'dsa'], exports='BuildEnv')
+#subobj = SConscript(dirs = ['./dsa/SConscript','./ds/SConscript'], exports = 'BuildEnv')  
+#subobj = SConscript(['./dsa/SConscript'])  
+obj = subobj + Object(Glob("*.c"))  
+Program("dsclient",list(obj))  

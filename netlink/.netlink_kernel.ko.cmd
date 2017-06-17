@@ -1,0 +1,1 @@
+cmd_/root/code1/yangz/ctest/netlink/netlink_kernel.ko := ld -r -m elf_x86_64 -T /usr/src/kernels/linux-3.4.44/scripts/module-common.lds --build-id  -o /root/code1/yangz/ctest/netlink/netlink_kernel.ko /root/code1/yangz/ctest/netlink/netlink_kernel.o /root/code1/yangz/ctest/netlink/netlink_kernel.mod.o
